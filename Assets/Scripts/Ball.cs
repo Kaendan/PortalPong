@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
+
+	private AudioSource audioSource;
+	public AudioClip sound1;
+	public AudioClip sound2;
 	
 	public float speed = 30;
 
 	void Start() {
+		audioSource = GetComponent<AudioSource> ();
+
 		// Initial Velocity
 		GetComponent<Rigidbody2D>().velocity = Vector2.down * speed;
 	}
@@ -41,6 +47,7 @@ public class Ball : MonoBehaviour {
 
 			// Set Velocity with dir * speed
 			GetComponent<Rigidbody2D>().velocity = dir * speed;
+			audioSource.PlayOneShot (sound1);
 		}
 
 		// Hit the right Racket?
@@ -55,6 +62,11 @@ public class Ball : MonoBehaviour {
 
 			// Set Velocity with dir * speed
 			GetComponent<Rigidbody2D>().velocity = dir * speed;
+			audioSource.PlayOneShot (sound1);
+		}
+
+		if (col.gameObject.tag == "Wall") {
+			audioSource.PlayOneShot (sound2);
 		}
 	}
 }
