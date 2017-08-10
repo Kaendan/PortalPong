@@ -7,14 +7,15 @@ public class Goal : MonoBehaviour
 {
 
     private int score = 0;
-    private int maxScore = 2;
+    private int maxScore = 10;
 
     public string name;
     public Text text;
+    public GameManager _GameManager;
     public Text _VictoryText;
     public GameObject _Line;
-    public GameObject _Ball;
     public GameObject _RetryButton;
+    public Vector2 _Direction;
 
     // Use this for initialization
     void Start()
@@ -24,12 +25,26 @@ public class Goal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Ball") {
+        if (other.tag == "Ball") {
             Debug.Log("Goal!");
             score++;
             updateScore();
-            checkVictory();
+            Destroy(other.gameObject);
+            if (checkVictory()) {
+                _Line.SetActive(false);
+                _VictoryText.gameObject.SetActive(true);
+                _VictoryText.text = name + " Wins!";
+                _RetryButton.SetActive(true);
+            } else {
+                StartCoroutine("RespawnBall");
+            }
         }
+    }
+
+    IEnumerator RespawnBall()
+    {
+        yield return new WaitForSeconds(1f);
+        _GameManager.SpawnBall(_Direction);
     }
 
     void updateScore()
@@ -37,14 +52,8 @@ public class Goal : MonoBehaviour
         text.text = score.ToString();
     }
 
-    void checkVictory()
+    bool checkVictory()
     {
-        if (score >= maxScore) {
-            Destroy(_Ball);
-            _Line.SetActive(false);
-            _VictoryText.gameObject.SetActive(true);
-            _VictoryText.text = name + " Wins!";
-            _RetryButton.SetActive(true);
-        }
+        return score >= maxScore;
     }
 }
