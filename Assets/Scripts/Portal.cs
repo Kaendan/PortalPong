@@ -20,6 +20,7 @@ public class Portal : MonoBehaviour
     {
         Vector3 newPos = transform.position;
         newPos.x += _Direction.x * (_Size.x + ball.GetSize().x) / 2;
+        newPos.y += _Direction.y * (_Size.y + ball.GetSize().y) / 2;
         return newPos;
     }
 
