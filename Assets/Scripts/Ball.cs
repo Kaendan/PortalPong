@@ -5,79 +5,64 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
 
-    private AudioSource audioSource;
-    public AudioClip sound1;
-    public AudioClip sound2;
-	
-    public float speed = 30;
+    public float _Speed = 5;
+    public AudioClip _PaddleSound;
+    public AudioClip _WallSound;
+    public AudioSource _AudioSource;
+    public Collider2D _Collider;
+    public Rigidbody2D _Body;
+
+    private Vector2 _Size;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        _Size = _Collider.bounds.size;
     }
 
-    public void setVelocity(Vector2 direction)
+    public Vector2 GetSize()
     {
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
+        return _Size;
     }
 
-    float hitFactor(Vector2 ballPos, Vector2 racketPos,
-                    float racketHeight)
+    public void SetVelocity(Vector2 direction)
     {
-        // ascii art:
-        // ||  1 <- at the top of the racket
-        // ||
-        // ||  0 <- at the middle of the racket
-        // ||
-        // || -1 <- at the bottom of the racket
+        _Body.velocity = direction * _Speed;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return _Body.velocity;
+    }
+
+    float HitFactor(Vector2 ballPos, Vector2 racketPos, float racketHeight)
+    {
         return (ballPos.x - racketPos.x) / racketHeight;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        // Note: 'col' holds the collision information. If the
-        // Ball collided with a racket, then:
-        //   col.gameObject is the racket
-        //   col.transform.position is the racket's position
-        //   col.collider is the racket's collider
+        if (other.gameObject.name == "Paddle1") {
+            float x = HitFactor(transform.position,
+                          other.transform.position,
+                          other.collider.bounds.size.x);
 
-        // Hit the left Racket?
-        if (col.gameObject.name == "Paddle1") {
-            // Calculate hit Factor
-            float x = hitFactor(transform.position,
-                          col.transform.position,
-                          col.collider.bounds.size.x);
-
-            // Calculate direction, make length=1 via .normalized
             Vector2 dir = new Vector2(x, 1).normalized;
-
-            // Set Velocity with dir * speed
-            GetComponent<Rigidbody2D>().velocity = dir * speed;
+            _Body.velocity = dir * _Speed;
         }
+            
+        if (other.gameObject.name == "Paddle2") {
+            float x = HitFactor(transform.position,
+                          other.transform.position,
+                          other.collider.bounds.size.x);
 
-        // Hit the right Racket?
-        if (col.gameObject.name == "Paddle2") {
-            // Calculate hit Factor
-            float x = hitFactor(transform.position,
-                          col.transform.position,
-                          col.collider.bounds.size.x);
-
-            // Calculate direction, make length=1 via .normalized
             Vector2 dir = new Vector2(x, -1).normalized;
-
-            // Set Velocity with dir * speed
-            GetComponent<Rigidbody2D>().velocity = dir * speed;
+            _Body.velocity = dir * _Speed;
         }
 
-        if (col.gameObject.tag == "Paddle") {
-            audioSource.PlayOneShot(sound1);
-        } else if (col.gameObject.tag == "Wall") {
-            audioSource.PlayOneShot(sound2);
+        if (other.gameObject.tag == "Paddle") {
+            _AudioSource.PlayOneShot(_PaddleSound);
+        } else if (other.gameObject.tag == "Wall") {
+            _AudioSource.PlayOneShot(_WallSound);
         }
-    }
-
-    public void Hide()
-    {
-        //gameObject.SetActive(false);
     }
 }

@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Debug.Log(Mathf.Sign(-10));
+        Debug.Log(Mathf.Sign(10));
+        Debug.Log(Mathf.Sign(0));
+
         if (GameParameters._TwoPlayers) {
             _Paddle2.SetActive(true);
         } else {
@@ -38,6 +42,6 @@ public class GameManager : MonoBehaviour
     public void SpawnBall(Vector2 direction)
     {
         Ball ball = Instantiate(_BallPrefab).GetComponent<Ball>() as Ball;
-        ball.setVelocity(direction);
+        ball.SetVelocity(direction);
     }
 }

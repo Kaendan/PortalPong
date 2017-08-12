@@ -5,24 +5,21 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
 
-    public float speed = 30;
-    public string axis = "Horizontal";
-    public Collider2D collider;
-
-    public bool top = false;
-
-    Ray ray;
-    RaycastHit2D hit;
+    public float _Speed = 5;
+    public string _Axis = "Horizontal";
+    public bool _Top = false;
+    public Collider2D _Collider;
+    public Rigidbody2D _Body;
 
     void Update()
     { 
-        float h = Input.GetAxisRaw(axis);
+        float h = Input.GetAxisRaw(_Axis);
 
         int index = -1;
         Vector2 pos = Vector2.zero;
         for (int i = 0; i < Input.touchCount; i++) {
             pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-            if (top && pos.y > 0 || !top && pos.y < 0) {
+            if (_Top && pos.y > 0 || !_Top && pos.y < 0) {
                 index = i;
                 break;
             } 
@@ -36,7 +33,7 @@ public class Paddle : MonoBehaviour
             }
         }
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(h, 0) * speed;
+        _Body.velocity = new Vector2(h, 0) * _Speed;
     }
 
 }

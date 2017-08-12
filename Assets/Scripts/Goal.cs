@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class Goal : MonoBehaviour
 {
 
-    private int score = 0;
-    private int maxScore = 10;
+    private int _Score = 0;
+    private int _MaxScore = 10;
 
-    public string name;
-    public Text text;
+    public string _Name;
+    public Text _ScoreText;
     public GameManager _GameManager;
     public Text _VictoryText;
     public GameObject _Line;
@@ -20,20 +20,20 @@ public class Goal : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        updateScore();
+        UpdateScore();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ball") {
             Debug.Log("Goal!");
-            score++;
-            updateScore();
+            _Score++;
+            UpdateScore();
             Destroy(other.gameObject);
-            if (checkVictory()) {
+            if (CheckVictory()) {
                 _Line.SetActive(false);
                 _VictoryText.gameObject.SetActive(true);
-                _VictoryText.text = name + " Wins!";
+                _VictoryText.text = _Name + " Wins!";
                 _RetryButton.SetActive(true);
             } else {
                 StartCoroutine("RespawnBall");
@@ -47,13 +47,13 @@ public class Goal : MonoBehaviour
         _GameManager.SpawnBall(_Direction);
     }
 
-    void updateScore()
+    void UpdateScore()
     {
-        text.text = score.ToString();
+        _ScoreText.text = _Score.ToString();
     }
 
-    bool checkVictory()
+    bool CheckVictory()
     {
-        return score >= maxScore;
+        return _Score >= _MaxScore;
     }
 }
