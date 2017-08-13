@@ -2,38 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Paddle : MonoBehaviour
+public abstract class Paddle : MonoBehaviour
 {
 
     public float _Speed = 5;
     public string _Axis = "Horizontal";
     public bool _Top = false;
+    public Portal _Portal;
     public Collider2D _Collider;
-    public Rigidbody2D _Body;
 
-    void Update()
+    protected int _DirectionY;
+    protected Vector2 _Size;
+
+    protected float _MinBound = -2.2f;
+    protected float _MaxBound = 2.2f;
+
+    void Start()
+    {
+        if (_Top) {
+            _DirectionY = -1;
+        } else {
+            _DirectionY = 1;
+        }
+
+        _Size = _Collider.bounds.size;
+    }
+
+    void FixedUpdate()
     { 
-        float h = Input.GetAxisRaw(_Axis);
+        float x = _Speed * GetDirection() * Time.deltaTime;
+        transform.Translate(x, 0, 0);
 
-        int index = -1;
-        Vector2 pos = Vector2.zero;
-        for (int i = 0; i < Input.touchCount; i++) {
-            pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-            if (_Top && pos.y > 0 || !_Top && pos.y < 0) {
-                index = i;
-                break;
-            } 
+        if (transform.position.x > _MaxBound) {
+            transform.position = new Vector3(_MaxBound, transform.position.y, 0);
+        } else if (transform.position.x < _MinBound) {
+            transform.position = new Vector3(_MinBound, transform.position.y, 0);
         }
-      
-        if (index != -1) {
-            if (pos.x < 0) {
-                h = -1;
-            } else {
-                h = 1;
-            }
-        }
+    }
 
-        _Body.velocity = new Vector2(h, 0) * _Speed;
+    public abstract float GetDirection();
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Ball") {
+            float x = (other.transform.position.x - transform.position.x) / _Size.x;
+            Ball ball = other.gameObject.GetComponent<Ball>();
+            ball.SetSpeed(ball.GetSpeed() * 1.1f);
+            ball.SetVelocity(new Vector2(x, _DirectionY).normalized);
+        }
     }
 
 }

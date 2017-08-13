@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
 
     public float _Speed = 5;
+    public float _MaxSpeed = 10;
     public AudioClip _PaddleSound;
     public AudioClip _WallSound;
     public AudioSource _AudioSource;
@@ -24,9 +25,34 @@ public class Ball : MonoBehaviour
         return _Size;
     }
 
+    public float GetSpeed()
+    {
+        return _Speed;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        if (speed <= _MaxSpeed) {
+            _Speed = speed;
+        }
+    }
+
     public void SetVelocity(Vector2 direction)
     {
         _Body.velocity = direction * _Speed;
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        Debug.Log(direction);
+        Debug.Log("Ball 1 : " + _Body.velocity);
+        Vector2 newDirection = _Body.velocity;
+        newDirection.x = Mathf.Abs(newDirection.x) * direction.x;
+        newDirection.y = Mathf.Abs(newDirection.y) * direction.y;
+        Debug.Log("New Direction : " + newDirection);
+
+        _Body.velocity = newDirection;
+        Debug.Log("Ball 2 : " + _Body.velocity);
     }
 
     public Vector2 GetVelocity()
@@ -34,31 +60,8 @@ public class Ball : MonoBehaviour
         return _Body.velocity;
     }
 
-    float HitFactor(Vector2 ballPos, Vector2 racketPos, float racketHeight)
-    {
-        return (ballPos.x - racketPos.x) / racketHeight;
-    }
-
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name == "Paddle1") {
-            float x = HitFactor(transform.position,
-                          other.transform.position,
-                          other.collider.bounds.size.x);
-
-            Vector2 dir = new Vector2(x, 1).normalized;
-            _Body.velocity = dir * _Speed;
-        }
-            
-        if (other.gameObject.name == "Paddle2") {
-            float x = HitFactor(transform.position,
-                          other.transform.position,
-                          other.collider.bounds.size.x);
-
-            Vector2 dir = new Vector2(x, -1).normalized;
-            _Body.velocity = dir * _Speed;
-        }
-
         if (other.gameObject.tag == "Paddle") {
             _AudioSource.PlayOneShot(_PaddleSound);
         } else if (other.gameObject.tag == "Wall") {

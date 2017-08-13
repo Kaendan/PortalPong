@@ -4,43 +4,75 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-
-    public Vector2 _Direction;
     public Portal _LinkedPortal;
     public Collider2D _Collider;
+    public Vector2 _Direction;
 
     private Vector2 _Size;
+    private int _Index = 0;
 
     void Start()
     {
         _Size = _Collider.bounds.size;
     }
 
-    public Vector3 GetTeleportPosition(Ball ball)
+    public int GetIndex()
     {
-        Vector3 newPos = transform.position;
-        newPos.x += _Direction.x * (_Size.x + ball.GetSize().x) / 2;
-        newPos.y += _Direction.y * (_Size.y + ball.GetSize().y) / 2;
+        return _Index;
+    }
+
+    public Vector2 GetDirection()
+    {
+        return _Direction;
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        _Direction = direction;
+    }
+
+    public Vector2 GetTeleportPosition(Ball ball)
+    {
+        Vector2 newPos = transform.position;
+        newPos.x += _Direction.x * ((_Size.x + ball.GetSize().x) / 2 + 0.03f);
+        newPos.y += ball.transform.position.y - _LinkedPortal.transform.position.y;
         return newPos;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void ChangeDirection()
     {
-        if (other.tag == "Ball") {
-            Debug.Log("Portal");
-            Ball ball = other.GetComponent<Ball>();
-            ball.transform.position = _LinkedPortal.GetTeleportPosition(ball);
+        _Direction.x *= -1;
+        Debug.Log("Direction : " + _Direction);
+    }
 
-            Vector2 newVelocity = ball.GetVelocity();
-            if (_Direction.x != 0 && Mathf.Sign(_Direction.x) != Mathf.Sign(newVelocity.x)) {
-                newVelocity.x *= -1;
-            }
+    public void Teleport(Ball ball)
+    {
+        ball.transform.position = GetTeleportPosition(ball);
+        Debug.Log("Velocity" + ball.GetVelocity());
 
-            if (_Direction.y != 0 && Mathf.Sign(_Direction.y) != Mathf.Sign(newVelocity.y)) {
-                newVelocity.y *= -1;
-            }
+        Vector2 direction = Vector2.zero;
+        if (ball.GetVelocity().x != 0) {
+            direction.x = Mathf.Abs(ball.GetVelocity().x) / ball.GetVelocity().x;
+        }
 
-            ball.SetVelocity(newVelocity);
+        if (ball.GetVelocity().y != 0) {
+            direction.y = Mathf.Abs(ball.GetVelocity().y) / ball.GetVelocity().y;
+        }
+
+        Debug.Log("Portal 2 : " + direction);
+
+        if (_Direction.x != 0 && Mathf.Sign(_Direction.x) != Mathf.Sign(direction.x)) {
+            direction.x *= -1;
+        }
+
+        ball.SetDirection(direction);
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Ball") {
+            Ball ball = other.gameObject.GetComponent<Ball>();
+            _LinkedPortal.Teleport(ball);
         }
     }
 }

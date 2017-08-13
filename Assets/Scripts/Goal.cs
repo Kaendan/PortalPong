@@ -26,7 +26,6 @@ public class Goal : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ball") {
-            Debug.Log("Goal!");
             _Score++;
             UpdateScore();
             Destroy(other.gameObject);
