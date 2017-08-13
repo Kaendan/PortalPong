@@ -16,6 +16,7 @@ public class Goal : MonoBehaviour
     public GameObject _Line;
     public GameObject _RetryButton;
     public Vector2 _Direction;
+    public GameObject _Particles;
 
     // Use this for initialization
     void Start()
@@ -28,6 +29,7 @@ public class Goal : MonoBehaviour
         if (other.tag == "Ball") {
             _Score++;
             UpdateScore();
+            Instantiate(_Particles, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             if (CheckVictory()) {
                 _Line.SetActive(false);

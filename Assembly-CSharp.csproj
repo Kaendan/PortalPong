@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\GameParameters.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\OneShotParticles.cs" />
      <Compile Include="Assets\Scripts\Paddle.cs" />
      <Compile Include="Assets\Scripts\PaddleAuto.cs" />
      <Compile Include="Assets\Scripts\PaddlePlayer.cs" />

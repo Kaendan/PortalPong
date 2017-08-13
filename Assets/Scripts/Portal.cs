@@ -7,6 +7,7 @@ public class Portal : MonoBehaviour
     public Portal _LinkedPortal;
     public Collider2D _Collider;
     public Vector2 _Direction;
+    public GameObject _Particles;
 
     private Vector2 _Size;
     private int _Index = 0;
@@ -42,13 +43,11 @@ public class Portal : MonoBehaviour
     public void ChangeDirection()
     {
         _Direction.x *= -1;
-        Debug.Log("Direction : " + _Direction);
     }
 
     public void Teleport(Ball ball)
     {
         ball.transform.position = GetTeleportPosition(ball);
-        Debug.Log("Velocity" + ball.GetVelocity());
 
         Vector2 direction = Vector2.zero;
         if (ball.GetVelocity().x != 0) {
@@ -59,11 +58,13 @@ public class Portal : MonoBehaviour
             direction.y = Mathf.Abs(ball.GetVelocity().y) / ball.GetVelocity().y;
         }
 
-        Debug.Log("Portal 2 : " + direction);
+        Debug.Log("Portal2 : " + direction);
 
         if (_Direction.x != 0 && Mathf.Sign(_Direction.x) != Mathf.Sign(direction.x)) {
             direction.x *= -1;
         }
+
+        Debug.Log("Portal2 : " + direction);
 
         ball.SetDirection(direction);
     }
@@ -72,7 +73,13 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball") {
             Ball ball = other.gameObject.GetComponent<Ball>();
+            Debug.Log("Portal : " + ball.GetVelocity());
             _LinkedPortal.Teleport(ball);
+
+            // Particle Effect
+            Vector2 newPos = transform.position;
+            newPos.x += +_Direction.x * _Size.x / 2f;
+            Instantiate(_Particles, newPos, Quaternion.identity);
         }
     }
 }

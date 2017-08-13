@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public AudioSource _AudioSource;
     public Collider2D _Collider;
     public Rigidbody2D _Body;
+    public GameObject _Particles;
 
     private Vector2 _Size;
 
@@ -44,15 +45,13 @@ public class Ball : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
-        Debug.Log(direction);
-        Debug.Log("Ball 1 : " + _Body.velocity);
+        Debug.Log("Ball : " + direction);
         Vector2 newDirection = _Body.velocity;
         newDirection.x = Mathf.Abs(newDirection.x) * direction.x;
         newDirection.y = Mathf.Abs(newDirection.y) * direction.y;
-        Debug.Log("New Direction : " + newDirection);
-
+        Debug.Log("Ball : " + newDirection);
         _Body.velocity = newDirection;
-        Debug.Log("Ball 2 : " + _Body.velocity);
+        Debug.Log("Ball : " + _Body.velocity);
     }
 
     public Vector2 GetVelocity()
@@ -64,8 +63,12 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.tag == "Paddle") {
             _AudioSource.PlayOneShot(_PaddleSound);
+            // Particle Effect
+            Instantiate(_Particles, transform.position, Quaternion.identity);
         } else if (other.gameObject.tag == "Wall") {
             _AudioSource.PlayOneShot(_WallSound);
+            // Particle Effect
+            Instantiate(_Particles, transform.position, Quaternion.identity);
         }
     }
 }

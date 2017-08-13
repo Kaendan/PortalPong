@@ -27,7 +27,6 @@ public class PaddleAuto : Paddle
 
                 RaycastHit2D hit = Physics2D.Raycast(_Ball.transform.position, _BallVelocity, 10f, 1 << LayerMask.NameToLayer("PortalWall"));
                 if (hit.collider != null) {
-                    //Debug.Log(hit.collider.gameObject.name);
  
                     Vector2 newPos = _Portal.transform.position;
                     newPos.y = hit.point.y;
@@ -63,10 +62,5 @@ public class PaddleAuto : Paddle
         }
         _Portal.transform.position = _PortalPos;
         _PortalPos = Vector2.zero;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(new Vector2(0f, 1f), -Vector2.right * 10);
     }
 }
