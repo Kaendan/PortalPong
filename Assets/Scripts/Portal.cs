@@ -58,13 +58,9 @@ public class Portal : MonoBehaviour
             direction.y = Mathf.Abs(ball.GetVelocity().y) / ball.GetVelocity().y;
         }
 
-        Debug.Log("Portal2 : " + direction);
-
         if (_Direction.x != 0 && Mathf.Sign(_Direction.x) != Mathf.Sign(direction.x)) {
             direction.x *= -1;
         }
-
-        Debug.Log("Portal2 : " + direction);
 
         ball.SetDirection(direction);
     }
@@ -73,7 +69,6 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball") {
             Ball ball = other.gameObject.GetComponent<Ball>();
-            Debug.Log("Portal : " + ball.GetVelocity());
             _LinkedPortal.Teleport(ball);
 
             // Particle Effect

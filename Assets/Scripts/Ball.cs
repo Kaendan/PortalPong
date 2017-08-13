@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
 
-    public float _Speed = 5;
-    public float _MaxSpeed = 10;
+    public float _Speed = 3f;
+    public float _MaxSpeed = 9f;
     public AudioClip _PaddleSound;
     public AudioClip _WallSound;
     public AudioSource _AudioSource;
@@ -45,13 +45,10 @@ public class Ball : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
-        Debug.Log("Ball : " + direction);
         Vector2 newDirection = _Body.velocity;
         newDirection.x = Mathf.Abs(newDirection.x) * direction.x;
         newDirection.y = Mathf.Abs(newDirection.y) * direction.y;
-        Debug.Log("Ball : " + newDirection);
         _Body.velocity = newDirection;
-        Debug.Log("Ball : " + _Body.velocity);
     }
 
     public Vector2 GetVelocity()
