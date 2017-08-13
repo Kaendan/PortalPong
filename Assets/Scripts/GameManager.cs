@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnBall(Vector2 direction)
     {
-        Ball ball = Instantiate(_BallPrefab, new Vector2(0, 0), Quaternion.identity).GetComponent<Ball>() as Ball;
+        Ball ball = Instantiate(_BallPrefab).GetComponent<Ball>() as Ball;
         ball.SetVelocity(direction);
     }
 }

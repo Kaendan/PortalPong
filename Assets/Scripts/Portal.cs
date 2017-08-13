@@ -47,6 +47,7 @@ public class Portal : MonoBehaviour
 
     public void Teleport(Ball ball)
     {
+        ball.ResetTrail();
         ball.transform.position = GetTeleportPosition(ball);
 
         Vector2 direction = Vector2.zero;

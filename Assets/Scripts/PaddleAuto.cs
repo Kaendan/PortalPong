@@ -48,6 +48,12 @@ public class PaddleAuto : Paddle
                 }
 
             }
+        } else {
+            if (0 > this.transform.position.x + 0.1f) {
+                x = 1;
+            } else if (0 < this.transform.position.x - 0.1f) {
+                x = -1;
+            }
         }
 
         return x;
@@ -55,7 +61,7 @@ public class PaddleAuto : Paddle
 
     IEnumerator MovePortal()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (Mathf.Sign(_PortalPos.x) != Mathf.Sign(_Portal.transform.position.x)) {
             _Portal.ChangeDirection();

@@ -7,7 +7,7 @@ public class Goal : MonoBehaviour
 {
 
     private int _Score = 0;
-    private int _MaxScore = 10;
+    private int _MaxScore = 5;
 
     public string _Name;
     public Text _ScoreText;

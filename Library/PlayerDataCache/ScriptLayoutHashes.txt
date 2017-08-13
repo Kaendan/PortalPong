@@ -136,4 +136,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 bb5b76b234a66a13fb10be5a72b529f6 Assembly-CSharp.dll:.Goal
 86879262d75c4b7985f760a1c8983c11 Assembly-CSharp.dll:.GameManager
-0a32fb1ef4106e45ef9bd825971a9ee0 Assembly-CSharp.dll:.Ball
+ac0c5c17beea21194a0822d0f764da1e Assembly-CSharp.dll:.Ball

@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     public Collider2D _Collider;
     public Rigidbody2D _Body;
     public GameObject _Particles;
+    public TrailRenderer _Trail;
 
     private Vector2 _Size;
 
@@ -67,5 +68,10 @@ public class Ball : MonoBehaviour
             // Particle Effect
             Instantiate(_Particles, transform.position, Quaternion.identity);
         }
+    }
+
+    public void ResetTrail()
+    {
+        _Trail.Clear();
     }
 }
