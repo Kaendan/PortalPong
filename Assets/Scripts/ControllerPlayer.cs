@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Paddle controlled by a player
-public class PaddlePlayer : Paddle
+// Controls a paddle and a portal with a player's inputs
+public class ControllerPlayer : Controller
 {
     // Y Limit to move the paddle
     public float _PaddleLimit;

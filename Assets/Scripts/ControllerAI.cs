@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Paddle controlled by AI
-public class PaddleAuto : Paddle
+// Controls a paddle and a portal with an AI's inputs
+public class ControllerAI : Controller
 {
     GameObject _Ball;
     Rigidbody2D _BallBody;
@@ -11,18 +11,16 @@ public class PaddleAuto : Paddle
 
     Vector2 _PortalPos = Vector2.zero;
 
+    public void SetBall(Ball ball)
+    {
+        _Ball = ball.gameObject;
+        _BallBody = _Ball.GetComponent<Rigidbody2D>();
+    }
+
     // Manages inputs and returns the new X position
     public override float ManageInputs()
     {
         float x = 0;
-
-        if (_Ball == null) {
-            // Finds a ball - I should assign it directly from the spawner it would be better. FindGameObjectWithTag() has a cost...
-            _Ball = GameObject.FindGameObjectWithTag("Ball");
-            if (_Ball != null) {
-                _BallBody = _Ball.GetComponent<Rigidbody2D>();
-            }
-        }
 
         if (_Ball != null) {
             // If the ball's velocity has changed since the last time we checked it

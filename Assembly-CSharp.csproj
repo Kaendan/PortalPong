@@ -52,14 +52,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Ball.cs" />
+     <Compile Include="Assets\Scripts\Controller.cs" />
+     <Compile Include="Assets\Scripts\ControllerAI.cs" />
+     <Compile Include="Assets\Scripts\ControllerPlayer.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameParameters.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\OneShotParticles.cs" />
-     <Compile Include="Assets\Scripts\Paddle.cs" />
-     <Compile Include="Assets\Scripts\PaddleAuto.cs" />
-     <Compile Include="Assets\Scripts\PaddlePlayer.cs" />
      <Compile Include="Assets\Scripts\Portal.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

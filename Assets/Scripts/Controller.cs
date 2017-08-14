@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Abstract class : Used by PaddlePlayer and PaddleAuto - Represents a Paddle
-public abstract class Paddle : MonoBehaviour
+// Abstract class : Used by ControllerPlayer and ControllerAI - Controls a paddle and a portal
+public abstract class Controller : MonoBehaviour
 {
-    // the Paddle Speed
+    // the paddle's Speed
     public float _Speed = 5;
     // Axis used to move the paddle : Only used for debugging on computer
     public string _Axis = "Horizontal";

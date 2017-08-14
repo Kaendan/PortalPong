@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject _Paddle2;
-    public GameObject _PaddleAuto;
+    public ControllerAI _PaddleAI;
     public GameObject _BallPrefab;
 
     // Use this for initialization
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         if (GameParameters._TwoPlayers) {
             _Paddle2.SetActive(true);
         } else {
-            _PaddleAuto.SetActive(true);
+            _PaddleAI.gameObject.SetActive(true);
         }
 
         // Spawns a new ball and randomly define it's direction (up or down)
@@ -45,5 +45,8 @@ public class GameManager : MonoBehaviour
     {
         Ball ball = Instantiate(_BallPrefab).GetComponent<Ball>() as Ball;
         ball.SetVelocity(direction);
+        if (!GameParameters._TwoPlayers) {
+            _PaddleAI.SetBall(ball);
+        }
     }
 }
