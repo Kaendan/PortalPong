@@ -10,6 +10,7 @@ public class Portal : MonoBehaviour
     public Collider2D _Collider;
     public Vector2 _Direction;
     public GameObject _Particles;
+    public AudioSource _AudioSource;
 
     // Size of the collider bounds
     private Vector2 _Size;
@@ -81,6 +82,8 @@ public class Portal : MonoBehaviour
             Ball ball = other.gameObject.GetComponent<Ball>();
             // Teleports the ball to the other portal
             _LinkedPortal.Teleport(ball);
+
+            _AudioSource.Play();
 
             // Particle Effect
             Vector2 newPos = transform.position;

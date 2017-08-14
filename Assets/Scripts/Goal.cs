@@ -23,6 +23,7 @@ public class Goal : MonoBehaviour
     public Vector2 _Direction;
     // Direction used to spawn the ball depending on the victory
     public GameObject _Particles;
+    public AudioSource _AudioSource;
 
     // Use this for initialization
     void Start()
@@ -36,7 +37,10 @@ public class Goal : MonoBehaviour
         if (other.tag == "Ball") {
             _Score++;
             UpdateScore();
+
+            _AudioSource.Play();
             Instantiate(_Particles, other.transform.position, Quaternion.identity);
+
             Destroy(other.gameObject);
 
             // Check for victory
