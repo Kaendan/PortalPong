@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: -1920
-    y: 203
+    x: 0
+    y: 43
     width: 1920
     height: 997
   m_ShowMode: 4
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_MinSize: {x: 534, y: 271}
   m_MaxSize: {x: 18004, y: 10021}
   vertical: 0
-  controlID: 90
+  controlID: 132
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -382,8 +382,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: -1463
-    y: 824
+    x: 457
+    y: 664
     width: 603
     height: 354
   m_SearchFilter:
@@ -398,18 +398,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\trist\Documents\GitHub\PortalPong
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 48260000
-    m_LastClickedID: 9800
+    m_SelectedIDs: 3a260000
+    m_LastClickedID: 9786
     m_ExpandedIDs: 000000001c26000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -515,8 +515,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: -553
-    y: 252
+    x: 1367
+    y: 92
     width: 553
     height: 926
   m_ScrollPosition: {x: 0, y: 0}
@@ -548,29 +548,29 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: -1920
-    y: 824
+    x: 0
+    y: 664
     width: 453
     height: 354
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 72060000
     m_LastClickedID: 0
-    m_ExpandedIDs: acaefdff38affdff32b0fdff3ab0fdffa8bffdff2cc0fdff26c1fdff2ec1fdffd8a4feff28aefeff2ec5feffb6cbfeffe8fefeff6803ffff3c04ffff3a05ffff4605ffff1afcffff00000000342e000078300000
+    m_ExpandedIDs: 1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Paddle2
-      m_OriginalName: Paddle2
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 13802
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 3}
     m_SearchString: 
@@ -601,8 +601,8 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: -1920
-    y: 252
+    x: 0
+    y: 92
     width: 732
     height: 551
   m_SceneLighting: 1
@@ -675,8 +675,8 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: -1184
-    y: 252
+    x: 736
+    y: 92
     width: 627
     height: 551
   m_MaximizeOnPlay: 0
@@ -752,6 +752,6 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1064
-    y: 19
+    y: 664
     width: 299
     height: 354
